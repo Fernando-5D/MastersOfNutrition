@@ -1,2 +1,4 @@
 # MastersOfNutrition
-La app del hugo
+Paquetes a instalar:
+- flask (obvio).
+- requests (para mandar solicitudes a la API).
