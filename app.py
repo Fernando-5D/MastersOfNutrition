@@ -1,5 +1,5 @@
 import datetime
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, get_flashed_messages
 app = Flask(__name__)
 
 sesion = None
@@ -13,19 +13,19 @@ def sesion():
 def iniciandoSesion():
     if request.method == "POST":
         correo = request.form.get("correo")
-        for u in usuarios:
-            if correo in usuarios:
-                passw = request.form.get("passw")
-                if passw == usuarios[correo].passw:
-                    sesion = correo
-                else:
-                    flash("La contraseña es incorrecta.")
-                    break
+        if correo in usuarios:
+            passw = request.form.get("passw")
+            if passw == usuarios[correo].passw:
+                sesion = correo
             else:
-                flash("No se encontro el usuario, ingresaste el correo correctamente?")
-                break
+                flash("La contraseña es incorrecta.")
+        else:
+            flash("No se encontro el usuario, ingresaste el correo correctamente?")
         
-        return render_template("aqui la url de la plantilla principal")
+        if get_flashed_messages():
+            return redirect(url_for("sesion"))
+        else:
+            return render_template("aqui la url de la plantilla principal")
 
 @app.route("/registro")
 def registro():
