@@ -4,6 +4,10 @@ app = Flask(__name__)
 
 usuarios = {}
 
+@app.route("/")
+def index():
+    return render_template("index.html")
+
 @app.route("/sesion")
 def sesion():
     return render_template("sesion.html")
