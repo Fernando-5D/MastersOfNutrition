@@ -1,8 +1,7 @@
 import datetime
-from flask import Flask, render_template, request, flash, redirect, url_for, get_flashed_messages
+from flask import Flask, render_template, request, flash, redirect, url_for, get_flashed_messages, session
 app = Flask(__name__)
 
-sesion = None
 usuarios = {}
 
 @app.route("/sesion")
@@ -16,7 +15,7 @@ def iniciandoSesion():
         if correo in usuarios:
             passw = request.form.get("passw")
             if passw == usuarios[correo].passw:
-                sesion = correo
+                session["correo"] = correo
             else:
                 flash("La contraseña es incorrecta.")
         else:
