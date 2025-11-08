@@ -19,7 +19,15 @@ def iniciandoSesion():
         if correo in usuarios:
             passw = request.form.get("passw")
             if passw == usuarios[correo].passw:
+                nombre = usuarios[correo].nombre
+                fechaNacim = usuarios[correo].fechaNacim
+                genero = usuarios[correo].genero
+                
+                session["nombre"] = nombre
+                session["fechaNacim"] = fechaNacim
+                session["genero"] = genero
                 session["correo"] = correo
+                session["passw"] = passw
             else:
                 flash("La contraseña es incorrecta.")
         else:
@@ -28,7 +36,7 @@ def iniciandoSesion():
         if get_flashed_messages():
             return redirect(url_for("sesion"))
         else:
-            return render_template("aqui la url de la plantilla principal")
+            return render_template("index.html")
 
 @app.route("/registro")
 def registro():
