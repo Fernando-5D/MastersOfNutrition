@@ -9,11 +9,11 @@
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>
 </head>
-<body style="background-color: #FAF3DD;">
+<body style="background-color:rgb(127, 199, 127)">
 <main>
     <div class="container d-flex justify-content-center align-items-center mt-5">
     <div class="card shadow-sm rounded-3" style="width: 400px;">
-        <div class="card-body rounded-3 border border-3 border-warning-subtle" style="background-color: rgb(255, 248, 218)">
+        <div class="card-body rounded-3 border border-3 border border-success" style="background-color: rgb(195, 250, 183)">
         <h3 class="text-center mt-3 mb-4" style="font-family: Times New Roman">Crea tu cuenta</h3>
         <div class="text-center mb-3">
             <img id="imagenPersona" src="static/otro.png" width="100" class="rounded-circle border border-warning border-3">
@@ -22,42 +22,42 @@
         <form action="/registrando" method="post">
             <div class="mb-3">
             <label for="nombre" class="form-label" style="font-family: Times New Roman">Nombre Completo</label>
-            <input type="text" class="form-control border-warning" id="nombre" name="nombre">
+            <input type="text" class="form-control" id="nombre" name="nombre">
             </div>
 
             <div class="mb-3">
             <label for="fecha" class="form-label" style="font-family: Times New Roman">Fecha de Nacimiento</label>
-            <input type="date" class="form-control border-warning" id="fecha" name="fecha">
+            <input type="date" class="form-control" id="fecha" name="fecha">
             </div>
 
             <div class="mb-3">
             <label class="form-label" style="font-family: Times New Roman">Género</label><br>
-            <input type="radio" class="form-check-input border-warning" id="female" name="Genero" value="female">
+            <input type="radio" class="form-check-input" id="female" name="Genero" value="female">
             <label class="form-check-label" for="female" style="font-family: Times New Roman">Femenino</label>
 
-            <input type="radio" class="form-check-input border-warning" id="male" name="Genero" value="male">
+            <input type="radio" class="form-check-input" id="male" name="Genero" value="male">
             <label class="form-check-label" for="male" style="font-family: Times New Roman">Masculino</label>
 
-            <input type="radio" class="form-check-input border-warning" id="other" name="Genero" value="other">
+            <input type="radio" class="form-check-input" id="other" name="Genero" value="other">
             <label class="form-check-label" for="other" style="font-family: Times New Roman">Otro</label>
             </div>
 
             <div class="mb-3">
             <label for="email" class="form-label" style="font-family: Times New Roman">Correo electrónico</label>
-            <input type="email" class="form-control border-warning" id="email" name="email">
+            <input type="email" class="form-control" id="email" name="email">
             </div>
 
             <div class="mb-3">
             <label for="contraseña" class="form-label" style="font-family: Times New Roman">Contraseña</label>
-            <input type="password" class="form-control border-warning" id="contraseña" name="contraseña">
+            <input type="password" class="form-control" id="contraseña" name="contraseña">
             </div>
 
             <div class="mb-3">
             <label for="contraseñaCon" class="form-label" style="font-family: Times New Roman">Confirma tu contraseña</label>
-            <input type="password" class="form-control border-warning" id="contraseñaCon" name="contraseñaCon">
+            <input type="password" class="form-control" id="contraseñaCon" name="contraseñaCon">
             </div>
 
-            <button type="submit" class="btn btn-warning w-100 fw-bold">Regístrate</button>
+            <button type="submit" class="btn btn-success w-100 fw-bold">Regístrate</button>
         </form>
         </div>
     </div>
