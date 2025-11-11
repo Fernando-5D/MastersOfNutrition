@@ -2,6 +2,7 @@ import datetime
 from flask import Flask, render_template, request, flash, redirect, url_for, get_flashed_messages, session
 app = Flask(__name__)
 
+app.config["SECRET_KEY"] = "mastersofnutritionlaappnumerounodetodalacetis61"
 usuarios = {}
 
 @app.route("/")
@@ -18,14 +19,10 @@ def iniciandoSesion():
         correo = request.form.get("correo")
         if correo in usuarios:
             passw = request.form.get("passw")
-            if passw == usuarios[correo].passw:
-                nombre = usuarios[correo].nombre
-                fechaNacim = usuarios[correo].fechaNacim
-                genero = usuarios[correo].genero
-                
-                session["nombre"] = nombre
-                session["fechaNacim"] = fechaNacim
-                session["genero"] = genero
+            if passw == usuarios[correo]["passw"]:
+                session["nombre"] = usuarios[correo]["nombre"]
+                session["fechaNacim"] = usuarios[correo]["fechaNacim"]
+                session["genero"] = usuarios[correo]["genero"]
                 session["correo"] = correo
                 session["passw"] = passw
             else:
@@ -34,7 +31,7 @@ def iniciandoSesion():
             flash("No se encontro el usuario, ingresaste el correo correctamente?")
         
         if get_flashed_messages():
-            return redirect(url_for("sesion"))
+            return render_template("sesion.html")
         else:
             return render_template("index.html")
 
