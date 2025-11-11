@@ -1,5 +1,5 @@
 import datetime
-from flask import Flask, render_template, request, flash, redirect, url_for, get_flashed_messages, session
+from flask import Flask, render_template, request, flash, get_flashed_messages, session
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "mastersofnutritionlaappnumerounodetodalacetis61"
