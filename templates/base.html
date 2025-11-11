@@ -16,7 +16,6 @@
     <a href="/registro">Registrarse</a> |
     
     {% if session.get('nombre') %}
-            <p>Hola, {{ session['correo'] }}!</p> |
             <a href="{{ url_for('iniciandoSesion') }}">Cerrar sesión</a> |
             {% else %}
             <a href="/sesion">Iniciar sesión</a> |
