@@ -19,42 +19,42 @@
             <img id="imagenPersona" src="static/otro.png" width="100" class="rounded-circle border border-warning border-3">
         </div>
 
-        <form action="/registrando" method="post">
+        <form action="{{url_for('registrando')}}" method="post">
             <div class="mb-3">
             <label for="nombre" class="form-label" style="font-family: Times New Roman">Nombre Completo</label>
-            <input type="text" class="form-control" id="nombre" name="nombre">
+            <input type="text" class="form-control" id="nombre" name="nombre" value = "{{ request.form.get('nombre', '')}}" required minlenght="3" maxlenght="100" placeholder="Nombre">
             </div>
 
             <div class="mb-3">
             <label for="fecha" class="form-label" style="font-family: Times New Roman">Fecha de Nacimiento</label>
-            <input type="date" class="form-control" id="fecha" name="fecha">
+            <input type="date" class="form-control" id="fecha" name="fecha" required>
             </div>
 
             <div class="mb-3">
             <label class="form-label" style="font-family: Times New Roman">Género</label><br>
-            <input type="radio" class="form-check-input" id="female" name="Genero" value="female">
+            <input type="radio" class="form-check-input" id="female" name="Genero" value = "{{ request.form.get('genero', '')}}" required  placeholder="Genero">
             <label class="form-check-label" for="female" style="font-family: Times New Roman">Femenino</label>
 
-            <input type="radio" class="form-check-input" id="male" name="Genero" value="male">
+            <input type="radio" class="form-check-input" id="male" name="Genero"value = "{{ request.form.get('genero', '')}}" required  placeholder="Genero">
             <label class="form-check-label" for="male" style="font-family: Times New Roman">Masculino</label>
 
-            <input type="radio" class="form-check-input" id="other" name="Genero" value="other">
+            <input type="radio" class="form-check-input" id="other" name="Genero" value = "{{ request.form.get('genero', '')}}" required  placeholder="Genero">
             <label class="form-check-label" for="other" style="font-family: Times New Roman">Otro</label>
             </div>
 
             <div class="mb-3">
             <label for="email" class="form-label" style="font-family: Times New Roman">Correo electrónico</label>
-            <input type="email" class="form-control" id="email" name="email">
+            <input type="email" class="form-control" id="correo" name="correo" value="{{ request.form.get('correo', '') }}" required minlenght="3" maxlenght="100" placeholder="Numero de celular o correo electrónico">
             </div>
 
             <div class="mb-3">
             <label for="contraseña" class="form-label" style="font-family: Times New Roman">Contraseña</label>
-            <input type="password" class="form-control" id="contraseña" name="contraseña">
+            <input type="password" class="form-control" id="contraseña" name="contraseña"  value = "{{ request.form.get('contraseña', '')}}" required minlenght="3" maxlenght="100" placeholder="Contraseña nueva">
             </div>
 
             <div class="mb-3">
             <label for="contraseñaCon" class="form-label" style="font-family: Times New Roman">Confirma tu contraseña</label>
-            <input type="password" class="form-control" id="contraseñaCon" name="contraseñaCon">
+            <input type="password" class="form-control" id="contraseñaCon" name="contraseñaCon"  value = "{{ request.form.get('contraseñaCon', '')}}" required minlenght="3" maxlenght="100" placeholder="Confirmar contraseña">
             </div>
 
             <button type="submit" class="btn btn-success w-100 fw-bold">Regístrate</button>

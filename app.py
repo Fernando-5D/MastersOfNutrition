@@ -41,9 +41,11 @@ def registro():
 
 @app.route("/registrando", methods = ("GET", "POST"))
 def registrando():
-    error = []
-    if request.method == "POST":
-        fechaNacim = datetime.strptime(request.form["fechaNac"], '%Y-%m-%d').date()
+   # error = []
+    #if request.method == "POST":
+       # fechaNacim = datetime.strptime(request.form["fecha"], '%Y-%m-%d').date()
+    return render_template("registro.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
