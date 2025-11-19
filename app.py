@@ -18,8 +18,8 @@ def iniciandoSesion():
     if request.method == "POST":
         correo = request.form.get("correo")
         if correo in usuarios:
-            passw = request.form.get("passw")
-            if passw == usuarios[correo]["passw"]:
+            passw = request.form.get("contraseña")
+            if passw == usuarios[correo]["contraseña"]:
                 session["nombre"] = usuarios[correo]["nombre"]
                 session["fechaNacim"] = usuarios[correo]["fechaNacim"]
                 session["genero"] = usuarios[correo]["genero"]
@@ -41,10 +41,29 @@ def registro():
 
 @app.route("/registrando", methods = ("GET", "POST"))
 def registrando():
-   # error = []
-    #if request.method == "POST":
-       # fechaNacim = datetime.strptime(request.form["fecha"], '%Y-%m-%d').date()
-    return render_template("registro.html")
+   error = []
+   if request.method == "POST":
+        nombre = request.form["nombre"]
+        genero = request.form["genero"]
+        correo = request.form["correo"]
+        contraseña = request.form["contraseña"]
+        contraseñaCon = request.form["contraseñaCon"]
+
+        if error(nombre) < 3:
+            flash("El nombre debe tener al menos 3 caracteres.")
+            return render_template("registro.html", nombre=nombre)
+        
+        if contraseña != contraseñaCon:
+            error = "La contraseña no coincide."
+            
+        if error != None:
+            flash(error)
+            return render_template("registro.html")
+        else:
+            flash(f"¡Registro exitoso para el usuario: ¡{nombre}!")
+            return render_template("index.html")
+
+   return render_template("registro.html")
 
 
 if __name__ == "__main__":

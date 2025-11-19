@@ -19,7 +19,7 @@
                 <form action="/iniciandoSesion" method="post">
 
                     <div class="mb-3">
-                        <input type="email" class="form-control form-control-lg border-danger" name="correo" placeholder="Correo electrónico" required>
+                        <input type="email" class="form-control form-control-lg border-danger" name="correo" placeholder="Correo electrónico" value="{{ request.form.get('correo', '') }}" required minlenght="3" maxlenght="100" placeholder="Correo electrónico">
                     </div>
 
                     <div class="mb-3">
