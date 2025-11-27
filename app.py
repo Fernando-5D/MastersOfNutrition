@@ -41,8 +41,8 @@ def registro():
 
 @app.route("/registrando", methods = ("GET", "POST"))
 def registrando():
-   error = []
-   if request.method == "POST":
+    error = []
+    if request.method == "POST":
         nombre = request.form["nombre"]
         genero = request.form["genero"]
         correo = request.form["correo"]
@@ -63,8 +63,7 @@ def registrando():
             flash(f"¡Registro exitoso para el usuario: ¡{nombre}!")
             return render_template("index.html")
 
-   return render_template("registro.html")
-
+return render_template("registro.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
