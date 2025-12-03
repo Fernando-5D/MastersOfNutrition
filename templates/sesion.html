@@ -1,44 +1,33 @@
-<!DOCTYPE html>
-<html lang="es-mx">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesion</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
-<body class="bg-dark">
-    
-    <div class="container d-flex justify-content-center align-items-center min-vh-100">
-        <div class="card border-danger" style="width: 400px;">
-            <div class="card-body bg-black p-4">
+{% extends "base.html" %}
 
-                <div class="text-center mb-4">
-                    <img src="https://images.cooltext.com/5744804.gif" width="350" height="66" alt="Inicio de Sesion" />
-                </div>
+{% block title %}Inicio de Sesión{% endblock %}
+
+{% block content %}
+<div style="min-height: calc(100vh - 200px); padding: 20px 0;">
+    <div class="container d-flex justify-content-center align-items-center mt-5">
+        <div class="card shadow-sm rounded-3 mb-5" style="width: 400px;">
+            <div class="card-body rounded-3 border border-3 border-success" style="background-color: rgb(195, 250, 183)">
+                <h3 class="text-center mt-3 mb-4" style="font-family: Times New Roman">Iniciar Sesión</h3>
                 
                 <form action="/iniciandoSesion" method="post">
+                    <div class="mb-3">
+                        <label for="correo" class="form-label" style="font-family: Times New Roman">Correo electrónico</label>
+                        <input type="email" class="form-control" id="correo" name="correo" value="{{ request.form.get('correo', '') }}" required placeholder="Correo electrónico">
+                    </div>
 
                     <div class="mb-3">
-                        <input type="email" class="form-control form-control-lg border-danger" name="correo" placeholder="Correo electrónico" value="{{ request.form.get('correo', '') }}" required minlenght="3" maxlenght="100" placeholder="Correo electrónico">
+                        <label for="contraseña" class="form-label" style="font-family: Times New Roman">Contraseña</label>
+                        <input type="password" class="form-control" id="contraseña" name="contraseña" required placeholder="Contraseña">
                     </div>
 
-                    <div class="mb-3">
-                        <input type="passw" class="form-control form-control-lg border-danger" name="contraseña" placeholder="Contraseña" required>
+                    <div class="text-center mt-4 mb-1">
+                        <button type="submit" class="btn btn-success fw-bold mb-3">Iniciar sesión</button>
                     </div>
-
-                    <div class="text-center">
-                    <button type="submit" class="btn btn-danger btn-lg mb-3" type="submit">Iniciar sesión</button>
-                    </div>
-
-                    <div class="text-center">
-                        <a href="{{ url_for('index') }}" class="btn btn-outline-danger btn-lg">Regresar al Inicio</a>
-                    </div>
-
+                    
                 </form>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-</body>
-</html>
+</div>
+{% endblock %}

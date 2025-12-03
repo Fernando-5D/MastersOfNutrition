@@ -15,29 +15,27 @@ def sesion():
 
 @app.route("/iniciandoSesion", methods = ("GET", "POST"))
 def iniciandoSesion():
-    if not session.get("correo"):
-        if request.method == "POST":
-            correo = request.form.get("correo")
-            if correo in usuarios:
-                passw = request.form.get("contraseña")
-                if passw == usuarios[correo]["contraseña"]:
-                    session["nombre"] = usuarios[correo]["nombre"]
-                    session["fechaNacim"] = usuarios[correo]["fechaNacim"]
-                    session["genero"] = usuarios[correo]["genero"]
-                    session["correo"] = correo
-                    session["contraseña"] = passw
-                else:
-                    flash("La contraseña es incorrecta.")
-            else:
-                flash("No se encontro el usuario, ingresaste el correo correctamente?")
-            
-            if get_flashed_messages():
-                return render_template("sesion.html")
-            else:
+    if request.method == "POST":
+        correo = request.form.get("correo")
+        if correo in usuarios:
+            passw = request.form.get("contraseña")
+            if passw == usuarios[correo]["contraseña"]:
+                session["nombre"] = usuarios[correo]["nombre"]
+                session["fechaNacim"] = usuarios[correo]["fechaNacim"]
+                session["genero"] = usuarios[correo]["genero"]
+                session["correo"] = correo
                 return render_template("index.html")
-    else:
-        session.clear()
+            else:
+                flash("La contraseña es incorrecta.")
+        else:
+            flash("No se encontro el usuario, ingresaste el correo correctamente?")
+        
         return render_template("sesion.html")
+
+@app.route("/cerrarSesion")
+def cerrarSesion():
+    session.clear()
+    return render_template("index.html")
 
 @app.route("/registro")
 def registro():
@@ -72,6 +70,10 @@ def registrando():
             "fechaNacim": fecha
         }
         
+        session["nombre"] = nombre
+        session["fechaNacim"] = fecha
+        session["genero"] = genero
+        session["correo"] = correo
         flash(f"¡Registro exitoso para el usuario: {nombre}!")
         return render_template("index.html")
     
