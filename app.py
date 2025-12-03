@@ -1,6 +1,5 @@
-import datetime
+from datetime import datetime, date
 from flask import Flask, render_template, request, flash, get_flashed_messages, session
-import requests
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "mastersofnutritionlaappnumerounodetodalacetis61"
@@ -16,25 +15,29 @@ def sesion():
 
 @app.route("/iniciandoSesion", methods = ("GET", "POST"))
 def iniciandoSesion():
-    if request.method == "POST":
-        correo = request.form.get("correo")
-        if correo in usuarios:
-            passw = request.form.get("contraseña")
-            if passw == usuarios[correo]["contraseña"]:
-                session["nombre"] = usuarios[correo]["nombre"]
-                session["fechaNacim"] = usuarios[correo]["fechaNacim"]
-                session["genero"] = usuarios[correo]["genero"]
-                session["correo"] = correo
-                session["passw"] = passw
+    if not session.get("correo"):
+        if request.method == "POST":
+            correo = request.form.get("correo")
+            if correo in usuarios:
+                passw = request.form.get("contraseña")
+                if passw == usuarios[correo]["contraseña"]:
+                    session["nombre"] = usuarios[correo]["nombre"]
+                    session["fechaNacim"] = usuarios[correo]["fechaNacim"]
+                    session["genero"] = usuarios[correo]["genero"]
+                    session["correo"] = correo
+                    session["contraseña"] = passw
+                else:
+                    flash("La contraseña es incorrecta.")
             else:
-                flash("La contraseña es incorrecta.")
-        else:
-            flash("No se encontro el usuario, ingresaste el correo correctamente?")
-        
-        if get_flashed_messages():
-            return render_template("sesion.html")
-        else:
-            return render_template("index.html")
+                flash("No se encontro el usuario, ingresaste el correo correctamente?")
+            
+            if get_flashed_messages():
+                return render_template("sesion.html")
+            else:
+                return render_template("index.html")
+    else:
+        session.clear()
+        return render_template("sesion.html")
 
 @app.route("/registro")
 def registro():
@@ -42,29 +45,37 @@ def registro():
 
 @app.route("/registrando", methods = ("GET", "POST"))
 def registrando():
-    error = []
     if request.method == "POST":
-        nombre = request.form["nombre"]
-        genero = request.form["genero"]
-        correo = request.form["correo"]
-        contraseña = request.form["contraseña"]
-        contraseñaCon = request.form["contraseñaCon"]
+        nombre = request.form.get("nombre")
+        fecha = datetime.strptime(request.form.get("fecha"), "%Y-%m-%d").date()
+        genero = request.form.get("genero")
+        correo = request.form.get("correo")
+        contraseña = request.form.get("contraseña")
+        contraseñaCon = request.form.get("contraseñaCon")
 
-        if error(nombre) < 3:
+        if len(nombre) < 3:
             flash("El nombre debe tener al menos 3 caracteres.")
             return render_template("registro.html", nombre=nombre)
         
         if contraseña != contraseñaCon:
-            error = "La contraseña no coincide."
-            
-        if error != None:
-            flash(error)
+            flash("La contraseña no coincide.")
             return render_template("registro.html")
-        else:
-            flash(f"¡Registro exitoso para el usuario: ¡{nombre}!")
-            return render_template("index.html")
-
-return render_template("registro.html")
+        
+        if correo in usuarios:
+            flash("El correo ya está registrado.")
+            return render_template("registro.html")
+        
+        usuarios[correo] = {
+            "nombre": nombre,
+            "genero": genero,
+            "contraseña": contraseña,
+            "fechaNacim": fecha
+        }
+        
+        flash(f"¡Registro exitoso para el usuario: {nombre}!")
+        return render_template("index.html")
+    
+    return render_template("registro.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

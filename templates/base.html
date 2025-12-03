@@ -15,10 +15,10 @@
     <a href="/">Inicio</a> |
     <a href="/registro">Registrarse</a> |
     
-    {% if session.get('nombre') %}
-            <a href="{{ url_for('iniciandoSesion') }}">Cerrar sesión</a> |
+    {% if session.get("correo") %}
+            <a href="{{ url_for('iniciandoSesion') }}">Cerrar sesión</a>
             {% else %}
-            <a href="/sesion">Iniciar sesión</a> |
+            <a href="/sesion">Iniciar sesión</a>
     {% endif %}
     </nav>
     </div>
@@ -29,7 +29,7 @@
 </main>
 
 <footer class="text-center bg-black p-4 fixed-bottom">
-    <p class="text-white">Made by Niggaz For Niggaz</p>
+    <p class="text-white">For gingerz para gingerz</p>
 </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
